@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div  data-aos="zoom-in" class="container" style="margin-top:120px;margin-bottom:100px;width:500px;max-width:100vw;background-color: white;padding:30px 0px;border-radius: 30px;box-shadow: 2px 2px 8px #ccc;">
+    <div  data-aos="zoom-in" class="container" style="margin-top:150px;margin-bottom:100px;width:500px;max-width:100vw;background-color: white;padding:20px 0px;border-radius: 25px;box-shadow: 2px 2px 8px #ccc;">
         <ul class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="pill" href="#student">Student Login</a>
@@ -67,7 +67,7 @@
     </div>
     <style>
         button{
-        background-color: tomato !important;
+        background-color: rgb(108, 99, 255) !important;
         color:white !important;
         height:45px !important;
         font-size:22px !important;
@@ -84,15 +84,14 @@
             color:gray;
             font-weight:700;
             font-size:20px;
-            border-bottom:2px solid gray !important;
             border-radius:0px !important;
         }
         .nav-link.active{
             background:white !important;
-            color:tomato !important;
+            color:rgb(108, 99, 255) !important;
             font-weight:800;
             font-size:20px;
-            border-bottom:2px solid red !important;
+            border-bottom:2px solid rgb(108, 99, 255) !important;
             border-radius:0px !important;
         }
     </style>
