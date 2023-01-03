@@ -15,13 +15,13 @@
 </head>
 <body>
 
-    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:#4AB80A99;z-index: 10000;top:0px;display: none;">
+    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:rgb(108, 99, 255);z-index: 10000;top:0px;display: none;">
         <div class="spinner-border" style="color:#fff;position:fixed;top:48%;left:49%;" role="status">
           <span class="sr-only"></span>
         </div>
     </div>
 
-    <div  data-aos="zoom-in" class="container" style="margin-top:150px;margin-bottom:100px;width:500px;max-width:100vw;background-color: white;padding:20px 0px;border-radius: 25px;box-shadow: 2px 2px 8px #ccc;">
+    <div  data-aos="zoom-in" class="container" style="margin-top:150px;margin-bottom:100px;width:500px;max-width:100vw;background-color: white;padding:10px;border-radius: 25px;box-shadow: 2px 2px 8px #ccc;">
         <ul class="nav nav-pills nav-justified" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" data-bs-toggle="pill" href="#student">Student Login</a>
@@ -32,13 +32,13 @@
         </ul>
         <div class="tab-content">
             <div id="student" class="tab-pane active"><br>
-                <form onsubmit="document.getElementById('loader').style.display='block'" style="margin: 0 15%" method="POST" action="/login.php">
+                <form onsubmit="document.getElementById('loader').style.display='block'" class="container" method="POST" action="/login.php">
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                         <label for="floatingInput">Student ID</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input type="date" class="form-control" id="floatingPassword" placeholder="Password">
                         <label for="floatingPassword">D.O.B</label>
                     </div>
                     <br>
@@ -48,7 +48,7 @@
                 </form>    
             </div>
             <div id="staff" class="tab-pane fade"><br>
-                <form onsubmit="document.getElementById('loader').style.display='block'" style="margin: 0 15%" method="POST" action="/login.php">
+                <form onsubmit="document.getElementById('loader').style.display='block'" class="container" method="POST" action="/login.php">
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                         <label for="floatingInput">Email address</label>
@@ -78,6 +78,7 @@
         }
         .nav-item{
             background:white;
+            border-radius:25px;
         }
         .nav-link{
             background:white;
@@ -91,9 +92,15 @@
             color:rgb(108, 99, 255) !important;
             font-weight:800;
             font-size:20px;
-            border-bottom:2px solid rgb(108, 99, 255) !important;
+            border-bottom:4px solid rgb(108, 99, 255) !important;
+            border-radius:25px 25px 0px 0px!important;
+        }
+        .form-control{
+            border:none !important;
+            border-bottom:1px solid gray !important;
             border-radius:0px !important;
         }
+        
     </style>
     <script src="/static/js/bootstrap.bundle.js"></script>
 </body>
