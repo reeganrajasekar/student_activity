@@ -2,7 +2,7 @@
 session_start();
 if ($_POST["email"]=="admin@gmail.com") {
     if ($_POST["passwd"]=="admin") {
-        $_SESSION["lock"] = "kjshbguyFU%^RT(*BYRC^9bi687%T";
+        $_SESSION["lock"] = "qwertyuio76529t9b8ny7KH*&TVOU^V%^JKUV%T#";
         header("Location: /admin/home.php");
         die();
     } else {
