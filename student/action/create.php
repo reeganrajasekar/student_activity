@@ -47,10 +47,10 @@ if ($uploadOk == 0) {
         header("Location: /student/?page=1&msg=File Uploaded Successfully !");
         die();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+      header("Location: /student/?page=1&err=Sorry, there was an error uploading your file.");
+      die();
     }
 
-    $conn->close();
 
   } else {
     header("Location: /student/?page=1&err=Sorry, there was an error uploading your file.");

@@ -26,7 +26,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card" style="border-radius: 1rem;background-color:#f5f5f5;">
-                        <form action="/staff_login.php" method="POST" class="card-body p-4 text-center">
+                        <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff_login.php" method="POST" class="card-body p-4 text-center">
                             <h2 class="fw-bold mb-4 text-uppercase text-primary" style="font-weight:800">Staff Login</h2>
                             <div class="form-floating mb-3">
                                 <input required type="email" name="mail" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -54,6 +54,22 @@
             background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
         }
     </style>
+    <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if(urlParams.get('err')){
+        document.write("<div id='err' style='position:fixed;bottom:30px; right:30px;background-color:tomato;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('err')+"</div>")
+    }
+    setTimeout(()=>{
+        document.getElementById("err").style.display="none"
+    }, 5000)
+    if(urlParams.get('msg')){
+        document.write("<div id='msg' style='position:fixed;bottom:30px; right:30px;background-color:green;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('msg')+"</div>")
+    }
+    setTimeout(()=>{
+        document.getElementById("msg").style.display="none"
+    }, 5000)
+</script>
     
     <script src="/static/js/bootstrap.bundle.js"></script>
 </body>

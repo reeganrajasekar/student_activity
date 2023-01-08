@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PMU</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" href="/static/img/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/static/js/moment.js"></script>
@@ -17,12 +16,12 @@
             padding:10px
         }
         .nav-item > .active{
-            color:red !important;
+            color:rgba(106, 17, 203, 1) !important;
         }
     </style>
 </head>
 <body>
-    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:#ff000099;z-index: 10000;top:0px;display: none;">
+    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:rgba(106, 17, 203, 1);z-index: 10000;top:0px;display: none;">
         <div class="spinner-border" style="color:#fff;position:fixed;top:48%;left:49%;" role="status">
           <span class="sr-only"></span>
         </div>
@@ -47,6 +46,16 @@
 
                     <li class="nav-item">
                         <a class="nav-link <?php if($_SERVER['PHP_SELF'] == '/admin/staff.php'){ echo 'active'; } ?>" href="/admin/staff.php?page=1">Staff</a>
+                    </li>
+                    <li class="nav-item dropdown text-center">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu text-center">
+                            <li><a class="dropdown-item" href="#">User : Admin</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/admin/logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

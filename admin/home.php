@@ -1,7 +1,7 @@
 <?php require("./layout/Header.php") ?>
 <?php require("./layout/db.php") ?>
     <main class="container mt-3 mb-3">
-        <h5 style="color:red;">Students Waiting List :</h5>
+        <h5 style="color:rgba(106, 17, 203, 1);">Students Waiting List :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
@@ -28,13 +28,13 @@
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around">
-                            <form action="/admin/action/approve.php" method="post">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/approve.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <button onclick="return confirm('Do you want to Approve?')" style="border:none;background:none;color:green">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"> <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/> </svg>
                                 </button>
                             </form>
-                            <form action="/admin/action/deny.php" method="post">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/deny.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <input type="hidden" name="file" value="<?php echo($row["file"])?>">
                                 <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </div>
-        <h5 style="color:red;">Students Waiting List :</h5>
+        <h5 style="color:rgba(106, 17, 203, 1);">Students Waiting List :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
@@ -88,13 +88,13 @@
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around">
-                            <form action="/admin/action/sapprove.php" method="post">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sapprove.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <button onclick="return confirm('Do you want to Approve?')" style="border:none;background:none;color:green">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16"> <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/> </svg>
                                 </button>
                             </form>
-                            <form action="/admin/action/sdeny.php" method="post">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sdeny.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <input type="hidden" name="file" value="<?php echo($row["file"])?>">
                                 <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">

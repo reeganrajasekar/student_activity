@@ -16,12 +16,12 @@
             padding:10px
         }
         .nav-item > .active{
-            color:red !important;
+            color:rgba(106, 17, 203, 1) !important;
         }
     </style>
 </head>
 <body>
-    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:#ff000099;z-index: 10000;top:0px;display: none;">
+    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:rgba(106, 17, 203, 7);z-index: 10000;top:0px;display: none;">
         <div class="spinner-border" style="color:#fff;position:fixed;top:48%;left:49%;" role="status">
           <span class="sr-only"></span>
         </div>
@@ -55,13 +55,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Upload New Certificate</h4>
+                <h4 class="modal-title" style="color:rgba(106, 17, 203, 1)">Upload New Certificate</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="/staff/action/create.php" method="post" enctype="multipart/form-data">
+                <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff/action/create.php" method="post" enctype="multipart/form-data">
                     <div class="form-floating mb-3 ">
                         <input required type="text" class="form-control"  name="title" placeholder="n">
                         <label >Title</label>
@@ -75,7 +75,7 @@
                         <label>File (JPG/PNG/PDF)</label>
                     </div>
                     <div style="display:flex;justify-content:flex-end">
-                        <button class="btn  w-25" style="background-color:red;color:#fff">Upload</button>
+                        <button class="btn  w-25" style="background-color:rgba(106, 17, 203, 1);color:#fff">Upload</button>
                     </div>
                 </form>
             </div>
@@ -84,7 +84,7 @@
         </div>
     </div>
     <main class="container mt-3 mb-3">
-        <h5 style="color:red;">Waiting For Approval :</h5>
+        <h5 style="color:rgba(106, 17, 203, 1);">Waiting For Approval :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
@@ -113,7 +113,7 @@
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;">
-                            <form action="/staff/action/delete.php" method="post">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff/action/delete.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <input type="hidden" name="file" value="<?php echo($row["file"])?>">
                                 <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
@@ -140,7 +140,7 @@
                 </tbody>
             </table>
         </div>
-        <h5 style="color:red;">Approved Certificates :</h5>
+        <h5 style="color:rgba(106, 17, 203, 1);">Approved Certificates :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
@@ -191,13 +191,13 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         if(urlParams.get('err')){
-            document.write("<div id='err' style='position:fixed;bottom:30px; right:30px;background-color:tomato;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('err')+"</div>")
+            document.write("<div id='err' style='position:fixed;bottom:30px; left:30px;background-color:tomato;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('err')+"</div>")
         }
         setTimeout(()=>{
             document.getElementById("err").style.display="none"
         }, 5000)
         if(urlParams.get('msg')){
-            document.write("<div id='msg' style='position:fixed;bottom:30px; right:30px;background-color:green;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('msg')+"</div>")
+            document.write("<div id='msg' style='position:fixed;bottom:30px; left:30px;background-color:green;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('msg')+"</div>")
         }
         setTimeout(()=>{
             document.getElementById("msg").style.display="none"

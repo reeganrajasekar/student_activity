@@ -14,12 +14,12 @@ if ($result->num_rows > 0) {
             header("Location: /student/");
             die();
         } else {
-            header("Location: /&err=Student ID or DOB is Wrong !");
+            header("Location: /?err=Student ID or DOB is Wrong !");
             die();
         }
     }
 }else{
-    header("Location: /&err=Student ID or DOB is Wrong !");
+    header("Location: /?err=Student ID or DOB is Wrong !");
     die();
 }
 

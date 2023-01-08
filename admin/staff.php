@@ -2,10 +2,10 @@
 <?php require("./layout/db.php") ?>
 
 <main class="container">
-    <h3 class="mt-4" style="color:red;display:flex;flex-direction:row;justify-content:space-between">
+    <h3 class="mt-4" style="color:rgba(106, 17, 203, 1);display:flex;flex-direction:row;justify-content:space-between">
         <span>Staff :</span>
         <span>
-            <button type="button" style="color:#fff;background-color:red"  class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+            <button type="button" style="color:#fff;background-color:rgba(106, 17, 203, 1)"  class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
                 Add
             </button>
         </span>
@@ -18,13 +18,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Staff</h4>
+                <h4 class="modal-title" style="color:rgba(106, 17, 203, 1)">Add Staff</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="/admin/action/staff.php" method="post">
+                <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/staff.php" method="post">
                     <div class="form-floating mb-3 ">
                         <input required type="text" class="form-control"  name="name" placeholder="n">
                         <label >Name</label>
@@ -50,7 +50,7 @@
                         <label >Department</label>
                     </div>
                     <div style="display:flex;justify-content:flex-end">
-                        <button class="btn  w-25" style="background-color:red;color:#fff">Add</button>
+                        <button class="btn  w-25" style="background-color:rgba(106, 17, 203, 1);color:#fff">Add</button>
                     </div>
                 </form>
             </div>
@@ -122,7 +122,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16"> <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/> <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/> </svg>
                     </button>
 
-                    <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/delstaff.php" method="post">
+                    <form onsubmit="document.getElementById('loader').style.display='block'" onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/delstaff.php" method="post">
                         <input type="hidden" name="id" value="<?php echo($row["id"]) ?>">
                         <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3 text-danger" viewBox="0 0 16 16">
@@ -137,7 +137,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" style="color:red">Staff Details</h4>
+                        <h4 class="modal-title" style="color:rgba(106, 17, 203, 1)">Staff Details</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -156,7 +156,7 @@
                         $sql1 = "SELECT * FROM scert WHERE sid = '$id' AND state='Approved'";
                         $result1 = $conn->query($sql1);
                         if ($result1->num_rows > 0) {?>
-                            <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates (<?php echo($result1->num_rows) ?>):</h4>
+                            <h4 style="font-size:20px;color:rgba(106, 17, 203, 1);text-decoration:underline">Certificates (<?php echo($result1->num_rows) ?>):</h4>
                             <div class="row gx-3 text-center">
                                 <div class="col-6 border bg-secondary text-white">Title</div>
                                 <div class="col-2 border bg-secondary text-white">Date</div>
@@ -169,7 +169,7 @@
                                 <div class="col-2 border"><?php echo($row1["date"])?></div>
                                 <div class="col-2 border"><a href="/static/uploads/<?php echo($row1["file"])?>" target="blank">Open File</a></div>
                                 <div class="col-2 border">
-                                    <form action="/admin/action/sdelete.php" method="post">
+                                    <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sdelete.php" method="post">
                                         <input type="hidden" name="id" value="<?php echo($row1["id"])?>">
                                         <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3 text-danger" viewBox="0 0 16 16">
@@ -182,7 +182,7 @@
                         <?php }  ?>
                             </div>
                         <?php }else{?>
-                            <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates (0):</h4>
+                            <h4 style="font-size:20px;color:rgba(106, 17, 203, 1);text-decoration:underline">Certificates (0):</h4>
                         <?php }?>
                     </div>
 
@@ -211,7 +211,7 @@
         <?php 
         for($page = 1; $page<= $number_of_page; $page++) { 
             if($page==$_GET['page']){
-                echo '<a style="margin:5px;padding:10px;border-radius:5px;border:2px solid red;background-color:red;font-weight:600;color:#fff;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
+                echo '<a style="margin:5px;padding:10px;border-radius:5px;border:2px solid rgba(106, 17, 203, 1);background-color:rgba(106, 17, 203, 1);font-weight:600;color:#fff;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
             }else{
                 echo '<a style="margin:5px;padding:8px;border-radius:5px;border:1px solid #aaa;color:#444;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
             }
