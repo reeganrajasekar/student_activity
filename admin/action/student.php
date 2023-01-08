@@ -21,7 +21,7 @@ if ($conn->query($sql) === TRUE) {
     header("Location: /admin/student.php?page=1&msg=Student Details Added Successfully !");
     die();
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" ;
 }
 
 ?>

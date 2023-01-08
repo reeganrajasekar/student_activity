@@ -42,8 +42,8 @@
                         <label >Student ID</label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
-                        <input required type="date" class="form-control"  name="dob" placeholder="n">
-                        <label >DOB</label>
+                        <input required type="text" class="form-control"  name="dob" placeholder="n">
+                        <label >DOB (DD/MM/YYYY)</label>
                     </div>
                     <div class="form-floating mb-3 mt-3">
                         <input required type="text" class="form-control"  name="dept" placeholder="n">
@@ -133,7 +133,7 @@
                 </td>
             </tr>
 
-            <div class="modal fade" id="myModal<?php echo($row["id"]) ?>">
+            <div class="modal modal-xl fade" id="myModal<?php echo($row["id"]) ?>">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -151,8 +151,39 @@
                             <span style="color:#888">Department : </span><?php echo($row["dept"]) ?><br>
                         </p>
                         <hr>
-                        <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates :</h4>
-
+                        <?php
+                        $id = $row["id"];
+                        $sql1 = "SELECT * FROM cert WHERE sid = '$id' AND state='Approved'";
+                        $result1 = $conn->query($sql1);
+                        if ($result1->num_rows > 0) {?>
+                            <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates (<?php echo($result1->num_rows) ?>):</h4>
+                            <div class="row gx-3 text-center">
+                                <div class="col-6 border bg-secondary text-white">Title</div>
+                                <div class="col-2 border bg-secondary text-white">Date</div>
+                                <div class="col-2 border bg-secondary text-white">File</div>
+                                <div class="col-2 border bg-secondary text-white">Action</div>
+                        <?php  
+                            while($row1 = $result1->fetch_assoc()) {
+                        ?>
+                                <div class="col-6 border"><?php echo($row1["title"])?></div>
+                                <div class="col-2 border"><?php echo($row1["date"])?></div>
+                                <div class="col-2 border"><a href="/static/uploads/<?php echo($row1["file"])?>" target="blank">Open File</a></div>
+                                <div class="col-2 border">
+                                    <form action="/admin/action/delete.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo($row1["id"])?>">
+                                        <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3 text-danger" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+                                <hr>
+                        <?php }  ?>
+                            </div>
+                        <?php }else{?>
+                            <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates (0):</h4>
+                        <?php }?>
                     </div>
 
                     </div>

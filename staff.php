@@ -26,14 +26,14 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card" style="border-radius: 1rem;background-color:#f5f5f5;">
-                        <div class="card-body p-4 text-center">
+                        <form action="/staff_login.php" method="POST" class="card-body p-4 text-center">
                             <h2 class="fw-bold mb-4 text-uppercase text-primary" style="font-weight:800">Staff Login</h2>
                             <div class="form-floating mb-3">
-                                <input required type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input required type="email" name="mail" class="form-control" id="floatingInput" placeholder="name@example.com">
                                 <label for="floatingInput">Staff Email</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input required type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input required type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Password</label>
                             </div>
 
@@ -41,7 +41,7 @@
                             <hr>
                             <span>or</span><br>
                             <a href="/">Login as Student</a>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

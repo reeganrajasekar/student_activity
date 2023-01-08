@@ -1,15 +1,26 @@
 <?php
-$username = $_POST["student"];
-$password = $_POST["dob"];
+require("./static/db.php");
 
-if($username=="10"){
-    if($password=="2023-01-01"){
-        echo("Login ok");
-    }else{
-        echo("Password Wrong");
+$mail = $_POST["mail"];
+$password = $_POST["password"];
+
+$sql = "SELECT * FROM staff where mail='$mail'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row["password"]==$password) {
+            setcookie("staff" ,$row["id"]);
+            header("Location: /staff/");
+            die();
+        } else {
+            header("Location: /&err=Username or Password is Wrong !");
+            die();
+        }
     }
 }else{
-    echo("User name wrong");
+    header("Location: /&err=Username or Password is Wrong !");
+    die();
 }
 
 ?>
