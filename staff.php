@@ -27,20 +27,20 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div class="card" style="border-radius: 1rem;background-color:#f5f5f5;">
                         <div class="card-body p-4 text-center">
-                            <h2 class="fw-bold mb-4 text-uppercase text-primary" style="font-weight:800">Student Login</h2>
+                            <h2 class="fw-bold mb-4 text-uppercase text-primary" style="font-weight:800">Staff Login</h2>
                             <div class="form-floating mb-3">
-                                <input required type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                <label for="floatingInput">Student ID</label>
+                                <input required type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Staff Email</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input required type="text" class="form-control" id="floatingPassword" placeholder="Password">
-                                <label for="floatingPassword">DOB (DD/MM/YYYY)</label>
+                                <input required type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Password</label>
                             </div>
 
-                            <button class="btn btn-primary btn-lg px-5 mb-4" type="submit">Login</button>
+                            <button class="btn btn-primary btn-lg px-5 w-100 mb-4" type="submit">Login</button>
                             <hr>
                             <span>or</span><br>
-                            <a href="/staff.php">Login as Staff</a>
+                            <a href="/">Login as Student</a>
                         </div>
                     </div>
                 </div>
