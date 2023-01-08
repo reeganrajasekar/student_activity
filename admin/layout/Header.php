@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:rgb(108, 99, 255);z-index: 10000;top:0px;display: none;">
+    <div id="loader" style="position:fixed;width:100%;height:100%;background-color:#ff000099;z-index: 10000;top:0px;display: none;">
         <div class="spinner-border" style="color:#fff;position:fixed;top:48%;left:49%;" role="status">
           <span class="sr-only"></span>
         </div>
