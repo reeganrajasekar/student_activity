@@ -1,3 +1,9 @@
+<?php
+if(!isset($_COOKIE["staff"])){
+    header("Location: /");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +48,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/staff">Logout</a>
+                    </li>
+                    <li class="nav-item dropdown text-center">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu text-center">
+                            <li><a class="dropdown-item" href="/admin/logout.php">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

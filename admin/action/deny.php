@@ -9,9 +9,9 @@ if ($conn->query($sql) === TRUE) {
     header("Location: /admin/home.php?page=1&msg=Certificate Denied !");
     die();
 } else {
-    echo "Error: " . $sql . "<br>" ;
+    header("Location: /admin/home.php?page=1&err=Something went Wrong!");
+    die();
 }
 
-$conn->close();
 
 ?>

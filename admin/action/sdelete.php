@@ -9,9 +9,8 @@ if ($conn->query($sql) === TRUE) {
     header("Location: /admin/staff.php?page=1&msg=Staff Certificate deleted Successfully !");
     die();
 } else {
-    echo "Error: " . $sql . "<br>" ;
+    header("Location: /admin/staff.php?page=1&err=Something went Wrong!");
+    die();
 }
-
-$conn->close();
 
 ?>

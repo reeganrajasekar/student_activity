@@ -6,12 +6,12 @@ $id = $_POST['id'];
 $sql = "DELETE FROM staff WHERE id=$id";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: /admin/staff.php?page=1&msg=Staff detail deleted Successfully !");
+    header("Location: /admin/staff.php?page=1&err=Staff detail deleted Successfully !");
     die();
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    header("Location: /admin/staff.php?page=1&err=Something Went Wrong!");
+    die();
 }
 
-$conn->close();
 
 ?>
