@@ -1,5 +1,5 @@
 <?php
-if(!isset($_COOKIE["staff"])){
+if(!isset($_COOKIE["sid"])){
     header("Location: /");
     die();
 }
@@ -46,15 +46,12 @@ if(!isset($_COOKIE["staff"])){
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/student?page=1">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/student?page=1">Logout</a>
-                    </li>
                     <li class="nav-item dropdown text-center">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Profile
                         </a>
                         <ul class="dropdown-menu text-center">
-                            <li><a class="dropdown-item" href="/admin/logout.php">Logout</a></li>
+                            <li><a class="dropdown-item" href="/">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
