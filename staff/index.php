@@ -59,7 +59,7 @@ if(!isset($_COOKIE["staff"])){
         </div>
     </nav>
 
-    <button type="button" style="color:#fff;background-color:red;position:fixed;right:2rem;bottom:2rem;font-size:22px;font-weight:800"  class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+    <button type="button" style="color:#fff;background-color:rgba(106, 17, 203, 1);position:fixed;right:2rem;bottom:2rem;font-size:22px;font-weight:800"  class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
         +
     </button>
     <div class="modal fade" id="myModal">

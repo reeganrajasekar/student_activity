@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
 if($_SESSION["lock"]!="qwertyuio76529t9b8ny7KH*&TVOU^V%^JKUV%T#"){
   header("Location: /admin");
   die();
