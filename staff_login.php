@@ -10,16 +10,20 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if ($row["password"]==$password) {
-            setcookie("staff" ,$row["id"]);
+            if(!isset($_SESSION)) 
+            { 
+                session_start(); 
+            }
+            $_SESSION["staff"] = $row["id"];
             header("Location: /staff/");
             die();
         } else {
-            header("Location: /?err=Username or Password is Wrong !");
+            header("Location: /staff.php?err=Username or Password is Wrong !");
             die();
         }
     }
 }else{
-    header("Location: /?err=Username or Password is Wrong !");
+    header("Location: /staff.php?err=Username or Password is Wrong !");
     die();
 }
 

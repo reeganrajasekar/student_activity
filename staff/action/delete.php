@@ -1,5 +1,12 @@
 <?php 
-
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["staff"])){
+  header("Location: /staff.php");
+  die();
+}
 require("../../static/db.php");
 $id = $_POST['id'];
 $sql = "DELETE FROM scert WHERE id='$id'";

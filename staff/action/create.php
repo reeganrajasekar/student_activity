@@ -1,4 +1,12 @@
 <?php 
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["staff"])){
+  header("Location: /staff.php");
+  die();
+}
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -6,7 +14,6 @@ function test_input($data) {
   return $data;
 
 }
-
 require("../../static/db.php");
 $file_name = strtotime("now").$_FILES["file"]["name"];
 $target_dir = "../../static/uploads/";
@@ -14,7 +21,6 @@ $target_file = $target_dir . basename($file_name);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-session_start();
 
 // Check file size
 if ($_FILES["file"]["size"] > 5000000) {
@@ -39,9 +45,10 @@ if ($uploadOk == 0) {
   if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
     $title = test_input($_POST['title']);
     $date = test_input($_POST['date']);
-    $sid =$_COOKIE['staff'];
-    $sql = "INSERT INTO scert (title , date,file , state ,sid)
-    VALUES ('$title' , '$date' , '$file_name' , 'Waiting List','$sid')";
+    $cat = test_input($_POST['cat']);
+    $sid =$_SESSION['staff'];
+    $sql = "INSERT INTO scert (title , date , cat,file , state ,sid)
+    VALUES ('$title' , '$date' ,'$cat' ,'$file_name' , 'Waiting List','$sid')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: /staff/?page=1&msg=File Uploaded Successfully !");

@@ -99,7 +99,7 @@
             }else{
                 $sql = "SELECT * FROM student order by id DESC LIMIT " . $page_first_result . ',' . $results_per_page;
             }
-                $result = $conn->query($sql);
+            $result = $conn->query($sql);
             if($_GET['page'] && $_GET['page']>1){
                 $i = $_GET['page']*10;
             }else{

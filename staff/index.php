@@ -1,7 +1,11 @@
 <?php
-if(!isset($_COOKIE["staff"])){
-    header("Location: /");
-    die();
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["staff"])){
+  header("Location: /staff.php");
+  die();
 }
 ?>
 <!DOCTYPE html>
@@ -74,6 +78,19 @@ if(!isset($_COOKIE["staff"])){
             <div class="modal-body">
                 <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff/action/create.php" method="post" enctype="multipart/form-data">
                     <div class="form-floating mb-3 ">
+                        <select required name="cat" class="form-control">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="FDP">FDP</option>
+                            <option value="Event organised">Event organised</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Funded event">Funded event</option>
+                            <option value="Webinar">Webinar</option>
+                            <option value="Paper Publication">Paper Publication</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3 ">
                         <input required type="text" class="form-control"  name="title" placeholder="n">
                         <label >Title</label>
                     </div>
@@ -102,6 +119,7 @@ if(!isset($_COOKIE["staff"])){
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>File</th>
                         <th>Action</th>
@@ -110,7 +128,7 @@ if(!isset($_COOKIE["staff"])){
                 <tbody>
                     <?php
                     require("../static/db.php");
-                    $sid =$_COOKIE['staff'];
+                    $sid =$_SESSION['staff'];
                     $sql = "SELECT * FROM scert where sid='$sid' AND state='Waiting List'  order by id DESC";
                     $result = $conn->query($sql);
                     $i = 0;
@@ -121,6 +139,7 @@ if(!isset($_COOKIE["staff"])){
                     <tr>
                         <td style="text-align:center"><?php echo($i) ?></td>
                         <td ><?php echo($row["title"]) ?></td>
+                        <td ><?php echo($row["cat"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;">
@@ -141,7 +160,7 @@ if(!isset($_COOKIE["staff"])){
                     ?>
 
                     <tr>
-                        <td colspan=5 style="text-align:center">Nothing found !</td>
+                        <td colspan=6 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
@@ -151,24 +170,42 @@ if(!isset($_COOKIE["staff"])){
                 </tbody>
             </table>
         </div>
-        <h5 style="color:rgba(106, 17, 203, 1);">Approved Certificates :</h5>
+        <?php
+        require("../static/db.php");
+        $results_per_page = 10; 
+        $sid =$_SESSION['staff'];
+        if (!isset ($_GET['page']) ) {  
+            $page = 1;  
+        } else {  
+            $page = $_GET['page'];  
+        }
+        $query = "SELECT * FROM scert where sid='$sid' AND state='Approved'"; 
+        $result = mysqli_query($conn, $query);  
+        $number_of_result = mysqli_num_rows($result);  
+        $number_of_page = ceil ($number_of_result / $results_per_page);  
+        $page_first_result = ($page-1) * $results_per_page;
+        ?>
+        <h5 style="color:rgba(106, 17, 203, 1);">Approved Certificates (<?php echo($number_of_result)?>) :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>file</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    require("../static/db.php");
-                    $sid =$_COOKIE['staff'];
-                    $sql = "SELECT * FROM scert where sid='$sid' AND state='Approved'  order by id DESC";
+                    $sql = "SELECT * FROM scert where sid='$sid' AND state='Approved'  order by id DESC LIMIT " . $page_first_result . ',' . $results_per_page;
                     $result = $conn->query($sql);
-                    $i = 0;
+                    if($_GET['page'] && $_GET['page']>1){
+                        $i = $_GET['page']*10;
+                    }else{
+                        $i=0;
+                    }
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             $i++;
@@ -176,6 +213,7 @@ if(!isset($_COOKIE["staff"])){
                     <tr>
                         <td style="text-align:center"><?php echo($i) ?></td>
                         <td ><?php echo($row["title"]) ?></td>
+                        <td ><?php echo($row["cat"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
 
@@ -186,7 +224,7 @@ if(!isset($_COOKIE["staff"])){
                     ?>
 
                     <tr>
-                        <td colspan=4 style="text-align:center">Nothing found !</td>
+                        <td colspan=5 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
@@ -195,6 +233,17 @@ if(!isset($_COOKIE["staff"])){
                     
                 </tbody>
             </table>
+            <p style="text-align:center;line-height:3.5;font-size:16px">
+                <?php 
+                for($page = 1; $page<= $number_of_page; $page++) { 
+                    if($page==$_GET['page']){
+                        echo '<a style="margin:5px;padding:10px;border-radius:5px;border:2px solid rgba(106, 17, 203, 1);background-color:rgba(106, 17, 203, 1);font-weight:600;color:#fff;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
+                    }else{
+                        echo '<a style="margin:5px;padding:8px;border-radius:5px;border:1px solid #aaa;color:#444;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
+                    }
+                }  
+                ?>
+            </p>
         </div>
     </main>
     <script src="/static/js/bootstrap.bundle.js"></script>

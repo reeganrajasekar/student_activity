@@ -10,7 +10,11 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if ($row["dob"]==$dob) {
-            setcookie("sid",$row["id"]);
+            if(!isset($_SESSION)) 
+            { 
+                session_start(); 
+            }
+            $_SESSION("sid") = $row["id"];
             header("Location: /student/");
             die();
         } else {

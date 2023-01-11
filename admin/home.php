@@ -61,7 +61,7 @@
                 </tbody>
             </table>
         </div>
-        <h5 style="color:rgba(106, 17, 203, 1);">Students Waiting List :</h5>
+        <h5 style="color:rgba(106, 17, 203, 1);">Staff Waiting List :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
                 <thead style="text-align:center">
@@ -87,7 +87,7 @@
                         <td ><?php echo($row["title"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
-                        <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around">
+                        <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around;height:100%">
                             <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sapprove.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo($row["id"])?>">
                                 <button onclick="return confirm('Do you want to Approve?')" style="border:none;background:none;color:green">
