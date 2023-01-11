@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
                 session_start(); 
             }
             $_SESSION("sid") = $row["id"];
-            header("Location: /student/");
+            header("Location: /student/?page=1");
             die();
         } else {
             header("Location: /?err=Student ID or DOB is Wrong !");

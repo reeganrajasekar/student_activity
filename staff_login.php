@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
                 session_start(); 
             }
             $_SESSION["staff"] = $row["id"];
-            header("Location: /staff/");
+            header("Location: /staff/?page=1");
             die();
         } else {
             header("Location: /staff.php?err=Username or Password is Wrong !");
