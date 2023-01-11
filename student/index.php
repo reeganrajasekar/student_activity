@@ -1,5 +1,9 @@
 <?php
-if(!isset($_COOKIE["sid"])){
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["sid"])){
     header("Location: /");
     die();
 }
@@ -13,7 +17,7 @@ if(!isset($_COOKIE["sid"])){
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="icon" href="/static/img/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/static/js/moment.js"></script>
+    <script src="/static/js/moment.js" ></script>
     <style>
         .nav-link{
             font-size: 18px;
@@ -95,6 +99,25 @@ if(!isset($_COOKIE["sid"])){
         </div>
     </div>
     <main class="container mt-3 mb-3">
+        <?php
+        require("../static/db.php");
+        $sid =$_SESSION['sid'];
+        $sql = "SELECT * FROM student WHERE id='$sid'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
+        <p style="background-color:rgba(106, 17, 203, 0.18);padding:10px;border-radius:8px;color:#444;border:1px solid #ccc;font-size:18px">Welcome <span style="font-size:20px;color:rgba(106, 17, 203, 1)"><?php echo($row["name"])?></span> ,</p>
+        <?php
+            }
+        }
+        ?>
+        <?php
+        $sql = "SELECT * FROM cert where sid='$sid' AND state='Waiting List'  order by id DESC";
+        $result = $conn->query($sql);
+        $i = 0;
+        if ($result->num_rows > 0) {
+            ?>
         <h5 style="color:rgba(106, 17, 203, 1);">Waiting For Approval :</h5>
         <div class="table-responsive">
             <table class="table table-striped table-bordered ">
@@ -109,24 +132,18 @@ if(!isset($_COOKIE["sid"])){
                 </thead>
                 <tbody>
                     <?php
-                    require("../static/db.php");
-                    $sid =$_COOKIE['sid'];
-                    $sql = "SELECT * FROM cert where sid='$sid' AND state='Waiting List'  order by id DESC";
-                    $result = $conn->query($sql);
-                    $i = 0;
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $i++;
-                    ?>
+                    while ($row = $result->fetch_assoc()) {
+                        $i++;
+                        ?>
                     <tr>
-                        <td style="text-align:center"><?php echo($i) ?></td>
-                        <td ><?php echo($row["title"]) ?></td>
-                        <td ><?php echo($row["date"]) ?></td>
-                        <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
+                        <td style="text-align:center"><?php echo ($i) ?></td>
+                        <td ><?php echo ($row["title"]) ?></td>
+                        <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
+                        <td ><a href="/static/uploads/<?php echo ($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;">
-                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/student/action/delete.php" method="post">
-                                <input type="hidden" name="id" value="<?php echo($row["id"])?>">
-                                <input type="hidden" name="file" value="<?php echo($row["file"])?>">
+                            <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff/action/delete.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo ($row["id"]) ?>">
+                                <input type="hidden" name="file" value="<?php echo ($row["file"]) ?>">
                                 <button onclick="return confirm('Do you want to delete?')" style="border:none;background:none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash3 text-danger" viewBox="0 0 16 16">
                                     <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
@@ -134,6 +151,59 @@ if(!isset($_COOKIE["sid"])){
                                 </button>
                             </form>
                         </td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                    
+                </tbody>
+            </table>
+        </div>
+        <?php
+        }
+        $results_per_page = 10; 
+        $sid =$_SESSION['sid'];
+        if (!isset ($_GET['page']) ) {  
+            $page = 1;  
+        } else {  
+            $page = $_GET['page'];  
+        }
+        $query = "SELECT * FROM cert where sid='$sid' AND state='Approved'"; 
+        $result = mysqli_query($conn, $query);  
+        $number_of_result = mysqli_num_rows($result);  
+        $number_of_page = ceil ($number_of_result / $results_per_page);  
+        $page_first_result = ($page-1) * $results_per_page;
+        ?>
+        <h5 style="color:rgba(106, 17, 203, 1);">Approved Certificates (<?php echo($number_of_result)?>) :</h5>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered ">
+                <thead style="text-align:center">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>file</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT * FROM cert where sid='$sid' AND state='Approved'  order by id DESC LIMIT " . $page_first_result . ',' . $results_per_page;
+                    $result = $conn->query($sql);
+                    if($_GET['page'] && $_GET['page']>1){
+                        $i = $_GET['page']*10;
+                    }else{
+                        $i=0;
+                    }
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            $i++;
+                    ?>
+                    <tr>
+                        <td style="text-align:center"><?php echo($i) ?></td>
+                        <td ><?php echo($row["title"]) ?></td>
+                        <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
+                        <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
+
                     </tr>
                     <?php
                         }
@@ -150,51 +220,17 @@ if(!isset($_COOKIE["sid"])){
                     
                 </tbody>
             </table>
-        </div>
-        <h5 style="color:rgba(106, 17, 203, 1);">Approved Certificates :</h5>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered ">
-                <thead style="text-align:center">
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Date</th>
-                        <th>file</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    require("../static/db.php");
-                    $sid =$_COOKIE['sid'];
-                    $sql = "SELECT * FROM cert where sid='$sid' AND state='Approved'  order by id DESC";
-                    $result = $conn->query($sql);
-                    $i = 0;
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                            $i++;
-                    ?>
-                    <tr>
-                        <td style="text-align:center"><?php echo($i) ?></td>
-                        <td ><?php echo($row["title"]) ?></td>
-                        <td ><?php echo($row["date"]) ?></td>
-                        <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
-
-                    </tr>
-                    <?php
-                        }
-                    } else {
-                    ?>
-
-                    <tr>
-                        <td colspan=4 style="text-align:center">Nothing found !</td>
-                    </tr>
-
-                    <?php
+            <p style="text-align:center;line-height:3.5;font-size:16px">
+                <?php 
+                for($page = 1; $page<= $number_of_page; $page++) { 
+                    if($page==$_GET['page']){
+                        echo '<a style="margin:5px;padding:10px;border-radius:5px;border:2px solid rgba(106, 17, 203, 1);background-color:rgba(106, 17, 203, 1);font-weight:600;color:#fff;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
+                    }else{
+                        echo '<a style="margin:5px;padding:8px;border-radius:5px;border:1px solid #aaa;color:#444;text-decoration:none" href = "?page=' . $page . '">' . $page . ' </a>';  
                     }
-                    ?>
-                    
-                </tbody>
-            </table>
+                }  
+                ?>
+            </p>
         </div>
     </main>
 

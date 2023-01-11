@@ -153,7 +153,7 @@ if(!isset($_SESSION["staff"])){
                         <td style="text-align:center"><?php echo ($i) ?></td>
                         <td ><?php echo ($row["title"]) ?></td>
                         <td ><?php echo ($row["cat"]) ?></td>
-                        <td ><?php echo ($row["date"]) ?></td>
+                        <td ><script>document.write(moment(<?php echo ($row["date"]) ?>).format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo ($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;">
                             <form onsubmit="document.getElementById('loader').style.display='block'" action="/staff/action/delete.php" method="post">
@@ -218,7 +218,7 @@ if(!isset($_SESSION["staff"])){
                         <td style="text-align:center"><?php echo($i) ?></td>
                         <td ><?php echo($row["title"]) ?></td>
                         <td ><?php echo($row["cat"]) ?></td>
-                        <td ><?php echo($row["date"]) ?></td>
+                        <td ><script>document.write(moment(<?php echo ($row["date"]) ?>).format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
 
                     </tr>

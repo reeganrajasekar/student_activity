@@ -7,6 +7,7 @@ function test_input($data) {
 
 }
 
+
 require("../../static/db.php");
 $file_name = strtotime("now").$_FILES["file"]["name"];
 $target_dir = "../../static/uploads/";
@@ -14,7 +15,14 @@ $target_file = $target_dir . basename($file_name);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-session_start();
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["sid"])){
+    header("Location: /");
+    die();
+}
 
 // Check file size
 if ($_FILES["file"]["size"] > 5000000) {
@@ -39,7 +47,7 @@ if ($uploadOk == 0) {
   if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
     $title = test_input($_POST['title']);
     $date = test_input($_POST['date']);
-    $sid =$_COOKIE['sid'];
+    $sid =$_SESSION['sid'];
     $sql = "INSERT INTO cert (title , date,file , state ,sid)
     VALUES ('$title' , '$date' , '$file_name' , 'Waiting List','$sid')";
 

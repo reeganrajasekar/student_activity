@@ -1,5 +1,13 @@
 <?php 
 
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+}
+if(!isset($_SESSION["sid"])){
+    header("Location: /");
+    die();
+}
 require("../../static/db.php");
 $id = $_POST['id'];
 $sql = "DELETE FROM cert WHERE id='$id'";

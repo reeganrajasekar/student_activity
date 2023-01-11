@@ -14,7 +14,7 @@ if ($result->num_rows > 0) {
             { 
                 session_start(); 
             }
-            $_SESSION("sid") = $row["id"];
+            $_SESSION["sid"] = $row["id"];
             header("Location: /student/?page=1");
             die();
         } else {
