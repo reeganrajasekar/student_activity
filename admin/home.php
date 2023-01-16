@@ -7,7 +7,10 @@
                 <thead style="text-align:center">
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Year</th>
+                        <th>Event Title</th>
                         <th>Date</th>
                         <th>File</th>
                         <th>Action</th>
@@ -24,6 +27,20 @@
                     ?>
                     <tr>
                         <td style="text-align:center"><?php echo($i) ?></td>
+                        <?php 
+                        $sid = $row["sid"];
+                        $sql1 = "SELECT * FROM student WHERE id = '$sid'";
+                        $result1 = $conn->query($sql1);
+                        if ($result1->num_rows > 0) {
+                            while($row1 = $result1->fetch_assoc()) {
+                        ?>
+                        <td ><?php echo($row1["sid"]) ?></td>
+                        <td ><?php echo($row1["name"]) ?></td>
+                        <td ><?php echo($row1["year"]) ?></td>
+                        <?php 
+                            }
+                        }
+                        ?>
                         <td ><?php echo($row["title"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
@@ -51,7 +68,7 @@
                     ?>
 
                     <tr>
-                        <td colspan=5 style="text-align:center">Nothing found !</td>
+                        <td colspan=8 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
@@ -67,6 +84,8 @@
                 <thead style="text-align:center">
                     <tr>
                         <th>#</th>
+                        <th>Staff ID</th>
+                        <th>Staff Name</th>
                         <th>Title</th>
                         <th>Date</th>
                         <th>File</th>
@@ -84,6 +103,19 @@
                     ?>
                     <tr>
                         <td style="text-align:center"><?php echo($i) ?></td>
+                        <?php 
+                        $sid = $row["sid"];
+                        $sql1 = "SELECT * FROM staff WHERE id = '$sid'";
+                        $result1 = $conn->query($sql1);
+                        if ($result1->num_rows > 0) {
+                            while($row1 = $result1->fetch_assoc()) {
+                        ?>
+                        <td ><?php echo($row1["sid"]) ?></td>
+                        <td ><?php echo($row1["name"]) ?></td>
+                        <?php 
+                            }
+                        }
+                        ?>
                         <td ><?php echo($row["title"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
@@ -111,7 +143,7 @@
                     ?>
 
                     <tr>
-                        <td colspan=5 style="text-align:center">Nothing found !</td>
+                        <td colspan=7 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
