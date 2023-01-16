@@ -87,6 +87,7 @@
                         <th>Staff ID</th>
                         <th>Staff Name</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>File</th>
                         <th>Action</th>
@@ -117,6 +118,7 @@
                         }
                         ?>
                         <td ><?php echo($row["title"]) ?></td>
+                        <td ><?php echo($row["cat"]) ?></td>
                         <td ><?php echo($row["date"]) ?></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around;height:100%">
@@ -143,7 +145,7 @@
                     ?>
 
                     <tr>
-                        <td colspan=7 style="text-align:center">Nothing found !</td>
+                        <td colspan=8 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
