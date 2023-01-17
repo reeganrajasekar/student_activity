@@ -134,7 +134,7 @@
             </tr>
 
             <div class="modal modal-xl fade" id="myModal<?php echo($row["id"]) ?>">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" style="color:rgba(106, 17, 203, 1)">Staff Details</h4>
@@ -158,17 +158,19 @@
                         if ($result1->num_rows > 0) {?>
                             <h4 style="font-size:20px;color:rgba(106, 17, 203, 1);text-decoration:underline">Certificates (<?php echo($result1->num_rows) ?>):</h4>
                             <div class="row gx-3 text-center">
-                                <div class="col-6 border bg-secondary text-white">Title</div>
-                                <div class="col-2 border bg-secondary text-white">Date</div>
-                                <div class="col-2 border bg-secondary text-white">File</div>
-                                <div class="col-2 border bg-secondary text-white">Action</div>
+                                <div class="col-4 border bg-secondary text-white" style="padding:8px">Title</div>
+                                <div class="col-2 border bg-secondary text-white" style="padding:8px">Type</div>
+                                <div class="col-2 border bg-secondary text-white" style="padding:8px">Date</div>
+                                <div class="col-2 border bg-secondary text-white" style="padding:8px">File</div>
+                                <div class="col-2 border bg-secondary text-white" style="padding:8px">Action</div>
                         <?php  
                             while($row1 = $result1->fetch_assoc()) {
                         ?>
-                                <div class="col-6 border"><?php echo($row1["title"])?></div>
-                                <div class="col-2 border"><?php echo($row1["date"])?></div>
-                                <div class="col-2 border"><a href="/static/uploads/<?php echo($row1["file"])?>" target="blank">Open File</a></div>
-                                <div class="col-2 border">
+                                <div class="col-md-4 border" style="padding:8px"><?php echo($row1["title"])?></div>
+                                <div class="col-md-2 border" style="padding:8px"><?php echo($row1["cat"])?></div>
+                                <div class="col-md-2 border" style="padding:8px"><script>document.write(moment('<?php echo ($row1["date"]) ?>').format('ll'))</script></div>
+                                <div class="col-md-2 border" style="padding:8px"><a href="/static/uploads/<?php echo($row1["file"])?>" target="blank">Open File</a></div>
+                                <div class="col-md-2 border" style="padding:8px">
                                     <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sdelete.php" method="post">
                                         <input type="hidden" name="id" value="<?php echo($row1["id"])?>">
                                         <input type="hidden" name="file" value="<?php echo($row1["file"])?>">
@@ -179,7 +181,6 @@
                                         </button>
                                     </form>
                                 </div>
-                                <hr>
                         <?php }  ?>
                             </div>
                         <?php }else{?>

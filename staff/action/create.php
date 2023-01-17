@@ -54,10 +54,9 @@ if ($uploadOk == 0) {
         header("Location: /staff/?page=1&msg=File Uploaded Successfully !");
         die();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+      header("Location: /staff/?page=1&err=Something went Wrong!");
+      die();
     }
-
-    $conn->close();
 
   } else {
     header("Location: /staff/?page=1&err=Sorry, there was an error uploading your file.");

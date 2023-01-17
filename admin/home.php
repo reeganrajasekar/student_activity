@@ -42,7 +42,7 @@
                         }
                         ?>
                         <td ><?php echo($row["title"]) ?></td>
-                        <td ><?php echo($row["date"]) ?></td>
+                        <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around">
                             <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/approve.php" method="post">
@@ -119,7 +119,7 @@
                         ?>
                         <td ><?php echo($row["title"]) ?></td>
                         <td ><?php echo($row["cat"]) ?></td>
-                        <td ><?php echo($row["date"]) ?></td>
+                        <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around;height:100%">
                             <form onsubmit="document.getElementById('loader').style.display='block'" action="/admin/action/sapprove.php" method="post">
