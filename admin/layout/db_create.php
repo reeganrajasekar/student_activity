@@ -39,6 +39,7 @@ $sql = "CREATE TABLE IF NOT EXISTS cert (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     sid INT(6) UNSIGNED,
     title VARCHAR(500),
+    cat VARCHAR(500),
     date DATE,
     file VARCHAR(500),
     state VARCHAR(125),

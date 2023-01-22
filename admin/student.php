@@ -169,14 +169,16 @@
                         if ($result1->num_rows > 0) {?>
                             <h4 style="font-size:20px;color:red;text-decoration:underline">Certificates (<?php echo($result1->num_rows) ?>):</h4>
                             <div class="row gx-3 text-center">
-                                <div class="col-6 border bg-secondary text-white" style="padding:8px">Title</div>
+                                <div class="col-4 border bg-secondary text-white" style="padding:8px">Title</div>
+                                <div class="col-2 border bg-secondary text-white" style="padding:8px">Type</div>
                                 <div class="col-2 border bg-secondary text-white" style="padding:8px">Date</div>
                                 <div class="col-2 border bg-secondary text-white" style="padding:8px">File</div>
                                 <div class="col-2 border bg-secondary text-white" style="padding:8px">Action</div>
                         <?php  
                             while($row1 = $result1->fetch_assoc()) {
                         ?>
-                                <div class="col-6 border" style="padding:8px"><?php echo($row1["title"])?></div>
+                                <div class="col-4 border" style="padding:8px"><?php echo($row1["title"])?></div>
+                                <div class="col-2 border" style="padding:8px"><?php echo($row1["cat"])?></div>
                                 <div class="col-2 border" style="padding:8px"><script>document.write(moment('<?php echo ($row1["date"]) ?>').format('ll'))</script></div>
                                 <div class="col-2 border" style="padding:8px"><a href="/static/uploads/<?php echo($row1["file"])?>" target="blank">Open File</a></div>
                                 <div class="col-2 border" style="padding:8px">
@@ -207,7 +209,7 @@
             ?>
 
             <tr>
-                <td colspan=7 style="text-align:center">No Student Details found !</td>
+                <td colspan=8 style="text-align:center">No Student Details found !</td>
             </tr>
 
             <?php

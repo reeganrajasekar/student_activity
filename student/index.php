@@ -78,6 +78,19 @@ if(!isset($_SESSION["sid"])){
             <div class="modal-body">
                 <form onsubmit="document.getElementById('loader').style.display='block'" action="/student/action/create.php" method="post" enctype="multipart/form-data">
                     <div class="form-floating mb-3 ">
+                        <select required name="cat" class="form-control">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Online Course">Online Course</option>
+                            <option value="Webinar">Webinar</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Cultural Events">Cultural Events</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Paper Publication">Paper Publication</option>
+                        </select>
+                    </div>    
+                    <div class="form-floating mb-3 ">
                         <input required type="text" class="form-control"  name="title" placeholder="n">
                         <label >Title</label>
                     </div>
@@ -125,6 +138,7 @@ if(!isset($_SESSION["sid"])){
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>File</th>
                         <th>Action</th>
@@ -138,6 +152,7 @@ if(!isset($_SESSION["sid"])){
                     <tr>
                         <td style="text-align:center"><?php echo ($i) ?></td>
                         <td ><?php echo ($row["title"]) ?></td>
+                        <td ><?php echo ($row["cat"]) ?></td>
                         <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo ($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;">
@@ -181,6 +196,7 @@ if(!isset($_SESSION["sid"])){
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>file</th>
                     </tr>
@@ -201,6 +217,7 @@ if(!isset($_SESSION["sid"])){
                     <tr>
                         <td style="text-align:center"><?php echo($i) ?></td>
                         <td ><?php echo($row["title"]) ?></td>
+                        <td ><?php echo($row["cat"]) ?></td>
                         <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
 

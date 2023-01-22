@@ -11,6 +11,7 @@
                         <th>Student Name</th>
                         <th>Year</th>
                         <th>Event Title</th>
+                        <th>Type</th>
                         <th>Date</th>
                         <th>File</th>
                         <th>Action</th>
@@ -42,6 +43,7 @@
                         }
                         ?>
                         <td ><?php echo($row["title"]) ?></td>
+                        <td ><?php echo($row["cat"]) ?></td>
                         <td ><script>document.write(moment('<?php echo ($row["date"]) ?>').format('ll'))</script></td>
                         <td ><a href="/static/uploads/<?php echo($row["file"]) ?>" target="blank">Open</a></td>
                         <td style="text-align:center;display:flex;flex-direction:row;justify-content:space-around">
@@ -68,7 +70,7 @@
                     ?>
 
                     <tr>
-                        <td colspan=8 style="text-align:center">Nothing found !</td>
+                        <td colspan=9 style="text-align:center">Nothing found !</td>
                     </tr>
 
                     <?php
@@ -86,7 +88,7 @@
                         <th>#</th>
                         <th>Staff ID</th>
                         <th>Staff Name</th>
-                        <th>Title</th>
+                        <th>Event Title</th>
                         <th>Type</th>
                         <th>Date</th>
                         <th>File</th>

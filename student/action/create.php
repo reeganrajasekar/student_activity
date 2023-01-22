@@ -46,10 +46,11 @@ if ($uploadOk == 0) {
 } else {
   if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
     $title = test_input($_POST['title']);
+    $cat = test_input($_POST['cat']);
     $date = test_input($_POST['date']);
     $sid =$_SESSION['sid'];
-    $sql = "INSERT INTO cert (title , date,file , state ,sid)
-    VALUES ('$title' , '$date' , '$file_name' , 'Waiting List','$sid')";
+    $sql = "INSERT INTO cert (title , date,file,cat , state ,sid)
+    VALUES ('$title' , '$date' , '$file_name','$cat' , 'Waiting List','$sid')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: /student/?page=1&msg=File Uploaded Successfully !");
