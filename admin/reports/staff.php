@@ -1,48 +1,41 @@
 <?php
-$sid = $_GET["sid"];
+$start = $_GET["start"];
+$end = $_GET["end"];
+$cat = $_GET["cat"];
 require("../layout/db.php");
 
-$sql = "SELECT * from staff where sid='$sid'";
+$sql = "SELECT DISTINCT sid FROM scert where state='Approved' AND cat='$cat' AND date >= '$start' AND date<='$end'";
 $result = $conn->query($sql);
+$products = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $id = $row["id"];
-        $sql2 = "SELECT * FROM scert WHERE sid = '$id' AND state='Approved'";
-        $result2 = $conn->query($sql2);
-        $new = [
-            'Staff Name',
-            'Staff ID',
-            'Staff Mail',
-            'Staff Mobile',
-            'Department',
-            'Total Certificates'
-        ];
-        $uname = $row["name"];
-        $uid = $row["sid"];
-        echo implode(',', $new) . PHP_EOL;
-        echo implode(',', [$row["name"],$row["sid"],$row["mail"],$row["mob"],$row["dept"],$result2->num_rows]) . PHP_EOL;
-        echo implode(',', ["",""]) . PHP_EOL;
-        $columns = [
-            'Title',
-            'type',
-            'Date'
-        ];
-        $events = [];
-        while ($row2 = $result2->fetch_assoc()) {
-            array_push($events,[$row2["title"], $row2["cat"], $row2["date"]]);
-        }
+        $sid = $row['sid'];
+        $sql1 = "SELECT * FROM staff WHERE id='$sid'";
+        $result1 = $conn->query($sql1);
+        if ($result1->num_rows > 0) {
+            while ($row1 = $result1->fetch_assoc()) {
+                $sql2 = "SELECT * FROM scert WHERE sid = '$sid' AND state='Approved' AND cat='$cat'";
+                $result2 = $conn->query($sql2);
+                array_push($products, [$row1["name"],$row1["sid"],$row1["mail"],$row1["mob"],$row1["dept"],$result2->num_rows]);
+            }
+        }            
     }
-    
-    header('Content-Type: text/csv');
-    header('Content-Disposition: attachment; filename="'.$uname.'_'.$uid.' report.csv"');
-    
-    echo implode(',', $columns) . PHP_EOL;
-    foreach ($events as $eve){
-        echo implode(',', $eve) . PHP_EOL;
-    }
-}else{
-    header("Location: /admin/report.php?err=There is no Staff Details Found!");
-    die();
-} 
+}
+$columns = [
+    'Staff Name',
+    'Staff ID',
+    'Staff Mail',
+    'Staff Mobile',
+    'Department',
+    'Total Certificates'
+];
 
+
+header('Content-Type: text/csv');
+header('Content-Disposition: attachment; filename="Staff '.$cat.' report ('.$start.' to '.$end.').csv"');
+
+echo implode(',', $columns) . PHP_EOL;
+foreach ($products as $product){
+    echo implode(',', $product) . PHP_EOL;
+}
 ?>
