@@ -23,7 +23,11 @@ if ($result->num_rows > 0) {
                     $sql2 = "SELECT * FROM scert WHERE sid = '$sid' AND state='Approved' AND cat='$cat'";
                 }
                 $result2 = $conn->query($sql2);
-                array_push($products, [$row1["name"],$row1["sid"],$row1["mail"],$row1["mob"],$row1["dept"],$result2->num_rows]);
+                $link = "";
+                while($r = $result2->fetch_assoc()){
+                    $link .= "http://".$_SERVER['SERVER_NAME']."/static/uploads/".$r["file"] . "  ";
+                }
+                array_push($products, [$row1["name"],$row1["sid"],$row1["mail"],$row1["mob"],$row1["dept"],$result2->num_rows,$link]);
             }
         }            
     }
@@ -34,7 +38,8 @@ $columns = [
     'Staff Mail',
     'Staff Mobile',
     'Department',
-    'Total Certificates'
+    'Total Certificates',
+    'Certificates'
 ];
 
 

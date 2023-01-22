@@ -14,7 +14,6 @@
     </style>
 </head>
 <body >
-
     <div id="loader" style="position:fixed;width:100%;height:100%;background-color:rgba(106, 17, 203, 1);z-index: 10000;top:0px;display: none;">
         <div class="spinner-border" style="color:#fff;position:fixed;top:48%;left:49%;" role="status">
           <span class="sr-only"></span>
