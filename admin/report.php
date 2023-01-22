@@ -54,6 +54,7 @@
                     <div class="mb-3 col-md-6">
                         <select required name="cat" class="form-select">
                             <option value="" disabled selected>Select Category</option>
+                            <option value="All">All</option>
                             <option value="Conference">Conference</option>
                             <option value="Seminar">Seminar</option>
                             <option value="Online Course">Online Course</option>
@@ -84,6 +85,7 @@
                     <div class="mb-3 col-md-6">
                         <select required name="cat" class="form-select">
                             <option value="" disabled selected>Select Category</option>
+                            <option value="All">All</option>
                             <option value="Conference">Conference</option>
                             <option value="Seminar">Seminar</option>
                             <option value="FDP">FDP</option>

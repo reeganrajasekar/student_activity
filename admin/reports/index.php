@@ -5,7 +5,11 @@ $cat = $_GET["cat"];
 $year = $_GET["year"];
 require("../layout/db.php");
 
-$sql = "SELECT DISTINCT sid FROM cert where state='Approved' AND cat='$cat' AND date >= '$start' AND date<='$end'";
+if ($cat == "All") {
+    $sql = "SELECT DISTINCT sid FROM cert where state='Approved' AND date >= '$start' AND date<='$end'";
+}else{
+    $sql = "SELECT DISTINCT sid FROM cert where state='Approved' AND cat='$cat' AND date >= '$start' AND date<='$end'";
+}
 $result = $conn->query($sql);
 $products = [];
 if ($result->num_rows > 0) {
@@ -15,7 +19,11 @@ if ($result->num_rows > 0) {
         $result1 = $conn->query($sql1);
         if ($result1->num_rows > 0) {
             while ($row1 = $result1->fetch_assoc()) {
-                $sql2 = "SELECT * FROM cert WHERE sid = '$sid' AND state='Approved' AND cat='$cat'";
+                if($cat=="All"){
+                    $sql2 = "SELECT * FROM cert WHERE sid = '$sid' AND state='Approved'";
+                }else{
+                    $sql2 = "SELECT * FROM cert WHERE sid = '$sid' AND state='Approved' AND cat='$cat'";
+                }
                 $result2 = $conn->query($sql2);
                 array_push($products, [$row1["name"],$row1["sid"],$row1["mail"],$row1["mob"],$row1["year"],$row1["dept"],$result2->num_rows]);
             }
