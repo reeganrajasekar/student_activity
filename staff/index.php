@@ -100,7 +100,7 @@ if(!isset($_SESSION["staff"])){
                     </div>
                     <div class="form-floating mb-3 mt-3">
                         <input required type="file" class="form-control"  name="file" placeholder="n">
-                        <label>File (JPG/PNG/PDF)</label>
+                        <label>File (JPG/JPEG/PNG)</label>
                     </div>
                     <div style="display:flex;justify-content:flex-end">
                         <button class="btn  w-25" style="background-color:rgba(106, 17, 203, 1);color:#fff">Upload</button>

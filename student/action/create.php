@@ -31,7 +31,7 @@ if ($_FILES["file"]["size"] > 5000000) {
 }
 
 // Allow certain file formats
-if($imageFileType=="pdf" || $imageFileType=="jpg" || $imageFileType=="png" || $imageFileType=="jpeg") {
+if($imageFileType=="jpg" || $imageFileType=="png" || $imageFileType=="jpeg") {
     
 }else{
     header("Location: /student/?page=1&err=Sorry, only pdf,jpg,jpeg,png files are allowed.");

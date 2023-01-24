@@ -48,7 +48,7 @@
                         <a class="nav-link <?php if($_SERVER['PHP_SELF'] == '/admin/staff.php'){ echo 'active'; } ?>" href="/admin/staff.php?page=1">Staff</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($_SERVER['PHP_SELF'] == '/admin/report.php'){ echo 'active'; } ?>" href="/admin/report.php">Report</a>
+                        <a class="nav-link <?php if($_SERVER['PHP_SELF'] == '/admin/report.php'){ echo 'active'; } ?>" href="/admin/report.php" target="_blank" >Report</a>
                     </li>
                     <li class="nav-item dropdown text-center">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
