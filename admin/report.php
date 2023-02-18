@@ -13,6 +13,7 @@
                             <select onchange="changed()" class="form-select" id="type"
                                 aria-label="Default select example">
                                 <option value="" disabled selected>Select Category</option>
+                                <option value="3">General Report</option>
                                 <option value="0">Student</option>
                                 <option value="1">Staff</option>
                             </select>
@@ -73,7 +74,7 @@
                 `)
             } else if (type == 1) {
                 $("#btn").html(`
-                <form class="container row mt-3" action="/admin/reports/staff.php" method="GET">
+                <form class="container row mt-3" action="/admin/reports/report.php" method="GET">
                     <div class="mb-3 col-md-6">
                         <label for="floatingInput" class="form-label">Start Date :</label>
                         <input type="date" class="form-control" id="floatingInput" required name="start">
@@ -94,6 +95,31 @@
                             <option value="Funded event">Funded event</option>
                             <option value="Webinar">Webinar</option>
                             <option value="Paper Publication">Paper Publication</option>
+                        </select>
+                    </div>
+                    <br>
+                    <center>
+                        <button class="mt-4 btn w-30" style="background-color:rgba(106, 17, 203, 1);color:#fff;">Download</button>
+                    </center>
+                </form>
+                `)
+            }else if (type == 3) {
+                $("#btn").html(`
+                <form class="container row mt-3" action="/admin/reports/report.php" method="GET">
+                    <div class="mb-3 col-md-6">
+                        <label for="floatingInput" class="form-label">Start Date :</label>
+                        <input type="date" class="form-control" id="floatingInput" required name="start">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="floatingInput" class="form-label">End Date :</label>
+                        <input type="date" class="form-control" id="floatingInput" required name="end">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                        <label for="floatingInput" class="form-label">Select User Category :</label>
+                        <select class="form-select" name="user" aria-label="Default select example">
+                            <option value="" selected disabled>Select User Category</option>
+                            <option value="student">Student</option>
+                            <option value="staff">Staff</option>
                         </select>
                     </div>
                     <br>
